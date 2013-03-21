@@ -297,7 +297,7 @@ else
     "set guifont=Liberation\ Mono\ 9
     "set guifont=Droid\ Sans\ Mono\ 9
     "set guifont=Consolas\ 9
-    set guifont=Monaco\ 10
+    set guifont=Monaco\ 9
     "set guifont=Dejavu\ Sans\ Mono\ 9
     set langmenu=zh_CN.utf-8
     set enc=utf-8
