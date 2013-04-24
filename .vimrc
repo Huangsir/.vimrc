@@ -20,8 +20,19 @@ Bundle 'scrooloose/nerdcommenter'
 Bundle 'ervandew/supertab'
 Bundle 'msanders/snipmate.vim'
 Bundle 'scrooloose/syntastic'
+Bundle 'pangloss/vim-javascript'
+Bundle 'Lokaltog/vim-easymotion'
+Bundle 'tpope/vim-surround'
+Bundle 'vim-scripts/LargeFile'
 
 filetype plugin indent on     " required!
+
+" ===========
+" vim-javascript
+" ===========
+let g:html_indent_inctags = "html,body,head,tbody"
+let g:html_indent_script1 = "inc"
+let g:html_indent_style1 = "inc"
 
 " ===========
 " syntastic
@@ -473,7 +484,6 @@ au BufNewFile,Bufread *.ros,*.inc,*.php set keywordprg="help"
 "======================================================
 "HTML标签补全
 "======================================================
-
 function! InsertHtmlTag()
   let pat = '\c<\w\+\s*\(\s\+\w\+\s*=\s*[''#$;,()."a-z0-9]\+\)*\s*>'
   normal! a>
