@@ -13,17 +13,19 @@ Bundle 'gmarik/vundle'
 
 Bundle 'kien/ctrlp.vim'
 Bundle 'Shougo/neocomplcache'
+Bundle 'Shougo/neosnippet'
 Bundle 'altercation/vim-colors-solarized'
 Bundle 'Lokaltog/vim-powerline'
-Bundle 'scrooloose/nerdtree'
+"Bundle 'scrooloose/nerdtree'
 Bundle 'scrooloose/nerdcommenter'
 Bundle 'ervandew/supertab'
-Bundle 'msanders/snipmate.vim'
+"Bundle 'msanders/snipmate.vim'
 Bundle 'scrooloose/syntastic'
 Bundle 'pangloss/vim-javascript'
 Bundle 'Lokaltog/vim-easymotion'
-Bundle 'tpope/vim-surround'
+"Bundle 'tpope/vim-surround'
 Bundle 'vim-scripts/LargeFile'
+Bundle 'klen/python-mode'
 
 filetype plugin indent on     " required!
 
@@ -208,7 +210,7 @@ set softtabstop=4
 set shiftwidth=4
 
 " 每行字符数
-set textwidth=80
+set textwidth=200
 
 " 用语法高亮来定义折叠
 set foldmethod=marker
@@ -419,22 +421,6 @@ endif
 " php代码折叠，会影响性能
 let php_folding = 1
 
-" php语法检查
-function! PhpCheckSyntax()
-  " Check php syntax
-  setlocal makeprg=\php\ -l\ -n\ -d\ html_errors=off\ %
-
-  " Set shellpipe
-  setlocal shellpipe=>
-
-  " Use error format for parsing PHP error output
-  setlocal errorformat=%m\ in\ %f\ on\ line\ %l
-  make %
-endfunction
-
-" 设置快捷键。Perform :PhpCheckSyntax()
-map <F6> :call PhpCheckSyntax()<CR>
-
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Python支持
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -480,6 +466,18 @@ au BufNewFile,BufRead *.ctp set filetype=php
 au BufRead,BufNewFile *.css set ft=css syntax=css3
 au BufRead,BufNewFile *.json set filetype=json
 au BufNewFile,Bufread *.ros,*.inc,*.php set keywordprg="help"
+
+" go fmt
+function! GolangFmt()
+  " Check php syntax
+  setlocal makeprg=\go\ fmt
+  " Set shellpipe
+  setlocal shellpipe=>
+  " Use error format for parsing PHP error output
+  setlocal errorformat=%m\ in\ %f\ on\ line\ %l
+  make %
+endfunction
+map <F6> :call GolangFmt()<CR>
 
 "======================================================
 "HTML标签补全
