@@ -22,12 +22,19 @@ Bundle 'ervandew/supertab'
 "Bundle 'msanders/snipmate.vim'
 Bundle 'scrooloose/syntastic'
 Bundle 'pangloss/vim-javascript'
-Bundle 'Lokaltog/vim-easymotion'
+"Bundle 'Lokaltog/vim-easymotion'
 "Bundle 'tpope/vim-surround'
 Bundle 'vim-scripts/LargeFile'
 Bundle 'klen/python-mode'
 
 filetype plugin indent on     " required!
+
+" ===========
+" python-mode
+" ===========
+let g:pymode_lint = 0
+let g:pymode_lint_minheight = 1
+let g:pymode_lint_maxheight = 1
 
 " ===========
 " vim-javascript
