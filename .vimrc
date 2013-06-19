@@ -22,12 +22,60 @@ Bundle 'ervandew/supertab'
 "Bundle 'msanders/snipmate.vim'
 Bundle 'scrooloose/syntastic'
 Bundle 'pangloss/vim-javascript'
-Bundle 'Lokaltog/vim-easymotion'
+"Bundle 'Lokaltog/vim-easymotion'
 "Bundle 'tpope/vim-surround'
 Bundle 'vim-scripts/LargeFile'
 Bundle 'klen/python-mode'
 
 filetype plugin indent on     " required!
+
+" ===========
+" python-mode
+" ===========
+" Disable pylint code plugin
+let g:pymode_lint = 1
+" Disable check code every save
+let g:pymode_lint_write = 0
+" Load run code plugin
+let g:pymode_run = 1
+" Key for run python code
+let g:pymode_run_key = '<leader><C-R>'
+" Load rope plugin
+let g:pymode_rope = 1
+" Map keys for autocompletion
+let g:pymode_rope_autocomplete_map = '<Tab>'
+" Auto create and open ropeproject
+let g:pymode_rope_auto_project = 1
+" Enable autoimport
+let g:pymode_rope_enable_autoimport = 1
+" Auto generate global cache
+let g:pymode_rope_autoimport_generate = 1
+let g:pymode_rope_autoimport_underlineds = 0
+let g:pymode_rope_codeassist_maxfixes = 10
+let g:pymode_rope_sorted_completions = 1
+let g:pymode_rope_extended_complete = 1
+let g:pymode_rope_autoimport_modules = ["os","shutil","datetime"]
+let g:pymode_rope_confirm_saving = 1
+let g:pymode_rope_global_prefix = "<C-x>p"
+let g:pymode_rope_local_prefix = "<C-c>r"
+let g:pymode_rope_vim_completion = 1
+let g:pymode_rope_guess_project = 1
+let g:pymode_rope_goto_def_newwin = ""
+let g:pymode_rope_always_show_complete_menu = 0
+" Disable python folding
+let g:pymode_folding = 0
+" Enable python objects and motion
+let g:pymode_motion = 1
+" Autoremove unused whitespaces
+let g:pymode_utils_whitespaces = 1
+" Enable pymode indentation
+let g:pymode_indent = 1
+" Set default pymode python options
+let g:pymode_options = 1
+" Load show documentation plugin
+let g:pymode_doc = 1
+" Key for show python documentation
+let g:pymode_doc_key = '<leader>k'
 
 " ===========
 " vim-javascript
@@ -439,16 +487,6 @@ if has("autocmd")
   "autocmd FileType python setlocal makeprg=python\ ./alltests.py
   "autocmd BufNewFile,BufRead test*.py setlocal makeprg=python\ %
 
-endif
-
-" python auto-complete code
-" Typing the following (in insert mode):
-"   os.lis<Ctrl-n>
-" will expand to:
-"   os.listdir(
-" Python 自动补全功能，只需要反覆按 Ctrl-N 就行了
-if has("autocmd")
-  autocmd FileType python set complete+=k~/.vim/tools/pydiction
 endif
 
 " Python syntax setting
