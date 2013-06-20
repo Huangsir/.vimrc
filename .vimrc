@@ -26,6 +26,7 @@ Bundle 'pangloss/vim-javascript'
 "Bundle 'tpope/vim-surround'
 Bundle 'vim-scripts/LargeFile'
 Bundle 'klen/python-mode'
+Bundle 'cespare/vim-toml'
 
 filetype plugin indent on     " required!
 
