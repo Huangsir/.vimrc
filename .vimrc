@@ -25,14 +25,20 @@ Bundle 'pangloss/vim-javascript'
 "Bundle 'Lokaltog/vim-easymotion'
 "Bundle 'tpope/vim-surround'
 Bundle 'vim-scripts/LargeFile'
-Bundle 'klen/python-mode'
 Bundle 'cespare/vim-toml'
+Bundle 'ingydotnet/yaml-vim'
+
+Bundle 'klen/python-mode'
+"Must after python-mode
+Bundle 'scrooloose/syntastic'
 
 filetype plugin indent on     " required!
 
 " ===========
 " python-mode
 " ===========
+" Load the whole plugin
+let g:pymode = 1
 " Disable pylint code plugin
 let g:pymode_lint = 1
 " Disable check code every save
