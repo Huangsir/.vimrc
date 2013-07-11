@@ -10,42 +10,47 @@ filetype off                   " required!
 set rtp+=~/.vim/bundle/vundle/
 call vundle#rc() " 使用:BundleInstall安装插件
 Bundle 'gmarik/vundle'
-
-Bundle 'kien/ctrlp.vim'
-Bundle 'Shougo/neocomplcache'
-Bundle 'Shougo/neosnippet'
-Bundle 'altercation/vim-colors-solarized'
-Bundle 'terryma/vim-multiple-cursors'
-Bundle 'Lokaltog/vim-powerline'
 "Bundle 'scrooloose/nerdtree'
-Bundle 'scrooloose/nerdcommenter'
-Bundle 'ervandew/supertab'
+"Bundle 'ervandew/supertab'
 "Bundle 'msanders/snipmate.vim'
-Bundle 'scrooloose/syntastic'
-Bundle 'pangloss/vim-javascript'
-"Bundle 'Lokaltog/vim-easymotion'
-"Bundle 'tpope/vim-surround'
-Bundle 'vim-scripts/LargeFile'
-Bundle 'klen/python-mode'
-Bundle 'scrooloose/syntastic'
-Bundle 'cespare/vim-toml'
-Bundle 'ingydotnet/yaml-vim'
+"Bundle 'Shougo/neocomplcache'
+"Bundle 'Shougo/neosnippet'
 
-filetype plugin indent on     " required!
+" 快速查找文件的神器，快捷键C-p
+Bundle 'kien/ctrlp.vim'
+let g:ctrlp_custom_ignore = '\.git$\|\.hg$\|\.svn$\|.rvm$'
+" 特定项目
+map <F3> :CtrlP ~/www/gitgateway/<cr>
 
-" ===========
-" vim-multiple-cursors
-" ===========
+" 配色样式
+Bundle 'altercation/vim-colors-solarized'
+
+" 同时修改多个东西的神器
+Bundle 'terryma/vim-multiple-cursors'
 let g:multi_cursor_start_key='<F7>'
 let g:multi_cursor_next_key='<C-n>'
 let g:multi_cursor_prev_key='<C-N>'
 let g:multi_cursor_skip_key='<C-x>'
 let g:multi_cursor_quit_key='<Esc>'
 
-" ===========
-" python-mode
-" ===========
-" Key for run python code
+"下面那条状态栏，需要特殊的字体支持
+Bundle 'Lokaltog/vim-powerline'
+" 状态栏要两行
+set laststatus=2 
+let g:Powerline_symbols = 'fancy'
+
+" 快速注释插件；快捷键 <leader>cc  <leader>cu
+Bundle 'scrooloose/nerdcommenter'
+
+" 神一样的不全工具，可以取代clang_complete, AutoComplPop, Supertab, neocomplcache
+Bundle 'Valloric/YouCompleteMe'
+let g:ycm_min_num_of_chars_for_completion = 3
+
+" 大文件分割，可以加快vim的速度
+Bundle 'vim-scripts/LargeFile'
+
+" python工具集合，python-mode自带pep8检查，需要放在syntastic前面
+Bundle 'klen/python-mode'
 let g:pymode_run_key = '<leader><C-R>'
 " Map keys for autocompletion
 let g:pymode_lint_ignore = "E501,C901,W0611"
@@ -54,16 +59,8 @@ let g:pymode_folding = 0
 " Key for show python documentation
 let g:pymode_doc_key = '<leader>k'
 
-" ===========
-" vim-javascript
-" ===========
-let g:html_indent_inctags = "html,body,head,tbody"
-let g:html_indent_script1 = "inc"
-let g:html_indent_style1 = "inc"
-
-" ===========
-" syntastic
-" ===========
+" 语法检查，需要放在python-mode后面以免冲突
+Bundle 'scrooloose/syntastic'
 let g:syntastic_check_on_open = 1
 let g:syntastic_error_symbol = '✗'
 let g:syntastic_warning_symbol = '⚠'
@@ -72,123 +69,48 @@ let g:syntastic_loc_list_height = 1
 let g:syntastic_enable_highlighting = 0
 let g:syntastic_mode_map = { 'passive_filetypes': ['scss', 'slim'] }
 
-" ===========
-" MiniBufExplorer
-" ===========
+" toml & yaml 高亮
+Bundle 'cespare/vim-toml'
+Bundle 'ingydotnet/yaml-vim'
+
+" javascript语法
+Bundle 'pangloss/vim-javascript'
+let g:html_indent_inctags = "html,body,head,tbody"
+let g:html_indent_script1 = "inc"
+let g:html_indent_style1 = "inc"
+
+" 快速补全代码；
+Bundle 'vim-scripts/UltiSnips'
+let g:UltiSnipsExpandTrigger="<c-j>"
+let g:UltiSnipsJumpForwardTrigger="<c-j>"
+let g:UltiSnipsJumpBackwardTrigger="<c-k>"
+
+"快速添加环绕符号；快捷键： ysiw' yss' vS' ds' cs'(
+Bundle 'tpope/vim-surround'
+
+" 缩进标识
+Bundle 'Yggdroot/indentLine'
+
+"更高效的移动 '' + w/fx
+Bundle 'Lokaltog/vim-easymotion'
+
+" 注释神器，快捷键 + & -
+Bundle 'terryma/vim-expand-region'
+
+" 括号着色
+Bundle 'kien/rainbow_parentheses.vim'
+" Always On
+au VimEnter * RainbowParenthesesToggle
+au Syntax * RainbowParenthesesLoadRound
+au Syntax * RainbowParenthesesLoadSquare
+au Syntax * RainbowParenthesesLoadBraces
+
+" required!
+filetype plugin indent on
+
+" MiniBufExplorer；wj, wk, wh, wl 切换标签
 let g:miniBufExplMapCTabSwitchBufs = 1
-" 用<C-h,j,k,l>切换到上下左右的窗口中去
-"let g:miniBufExplMapWindowNavVim = 1
-" 用<C-箭头键>切换到上下左右窗口中去
-"let g:miniBufExplMapWindowNavArrows = 1
 let g:miniBufExplModSelTarget = 1
-
-" ===========
-" PowerLine
-" ===========
-" 要set laststatus=2，fancy样式要装特殊字体
-let g:Powerline_symbols = 'fancy'
-
-" ===========
-" neocomplcache
-" ===========
-" Launches neocomplcache automatically on vim startup.
-let g:neocomplcache_enable_at_startup=1
-" Use smartcase.
-let g:neocomplcache_enable_smart_case = 1
-" Use camel case completion.
-let g:neocomplcache_enable_camel_case_completion = 1
-" Use underscore completion.
-let g:neocomplcache_enable_underbar_completion = 1
-" Sets minimum char length of syntax keyword.
-let g:neocomplcache_min_syntax_length = 3
-" buffer file name pattern that locks neocomplcache. e.g. ku.vim or fuzzyfinder
-let g:neocomplcache_lock_buffer_name_pattern = '\*ku\*'
-" 设置NeoComplCache不自动弹出补全列表
-let g:neocomplcache_disable_auto_complete=1
-" 启动快速匹配
-let g:NeoComplCache_Enable_Quick_Match=1
-
-" Define file-type dependent dictionaries.
-let g:neocomplcache_dictionary_filetype_lists = {
-    \ 'default' : '',
-    \ 'vimshell' : $HOME.'/.vimshell_hist',
-    \ 'scheme' : $HOME.'/.gosh_completions'
-    \ }
-
-" Define keyword, for minor languages
-if !exists('g:neocomplcache_keyword_patterns')
-  let g:neocomplcache_keyword_patterns = {}
-endif
-let g:neocomplcache_keyword_patterns['default'] = '\h\w*'
-
-" For snippet_complete marker.
-if has('conceal')
-    set conceallevel=2 concealcursor=i
-endif
-
-" Enable snipMate compatibility feature.
-let g:neosnippet#enable_snipmate_compatibility = 1
-
-" Recommended key-mappings.
-" <CR>: close popup and save indent.
-inoremap <expr><CR>  neocomplcache#smart_close_popup() . "\<CR>"
-" <TAB>: completion.
-inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
-" <C-h>, <BS>: close popup and delete backword char.
-inoremap <expr><C-h> neocomplcache#smart_close_popup()."\<C-h>"
-inoremap <expr><BS> neocomplcache#smart_close_popup()."\<C-h>"
-inoremap <expr><C-y>  neocomplcache#close_popup()
-inoremap <expr><C-e>  neocomplcache#cancel_popup()
-
-let g:neocomplcache_enable_auto_select = 1
-
-" Enable omni completion. Not required if they are already set elsewhere in .vimrc
-autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
-autocmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
-autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
-autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
-autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
-
-" Enable heavy omni completion, which require computational power and may stall the vim.
-if !exists('g:neocomplcache_omni_patterns')
-  let g:neocomplcache_omni_patterns = {}
-endif
-let g:neocomplcache_omni_patterns.ruby = '[^. *\t]\.\w*\|\h\w*::'
-"autocmd FileType ruby setlocal omnifunc=rubycomplete#Complete
-let g:neocomplcache_omni_patterns.php = '[^. \t]->\h\w*\|\h\w*::'
-let g:neocomplcache_omni_patterns.c = '\%(\.\|->\)\h\w*'
-let g:neocomplcache_omni_patterns.cpp = '\h\w*\%(\.\|->\)\h\w*\|\h\w*::'
-
-" ==========
-" neosnippet
-" ==========
-let g:snips_author='Gw.Huangsir'
-
-" ==========
-" Tlist
-" ==========
-" 不同时显示多个文件的tag，只显示当前文件的
-let Tlist_Show_One_File=1
-" 如果taglist窗口是最后一个窗口，则退出vim
-let Tlist_Exit_OnlyWindow=1
-"  taglist只显示当前文件tag
-let Tlist_File_Fold_Auto_Close=1
-" 在右侧窗口中显示taglist窗口
-let Tlist_Use_Right_Window=1
-" 快捷键打开taglist
-map <F4> :Tlist<cr>
-
-" ==========
-" NERDTree
-" ==========
-" NERDTree可以ReFlash，要设置set modifiable
-map <F2> :NERDTreeToggle<cr>
-:let NERDTreeIgnore=['\.orig$', '\~$']
-
-" ==========
-" CtrlP
-" ==========
-map <F3> :CtrlP ~/www/gitgateway/<cr>
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " General
@@ -254,9 +176,6 @@ set number
 
 " 命令行高度1行
 set cmdheight=1
-
-" 总是显示状态栏2（这个选项会影响powerline发挥）
-set laststatus=2
 
 " 总是显示标签栏
 set showtabline=0
@@ -350,6 +269,15 @@ if has("gui_running")
     " set cursorline
 endif
 
+au BufNewFile,BufRead *.go set filetype=go
+" php & html
+au BufNewFile,BufRead *.tpl set filetype=html
+au BufNewFile,BufRead *.ctp set filetype=php
+"au BufNewFile,BufRead *.html set filetype=jinja
+au BufRead,BufNewFile *.css set ft=css syntax=css3
+au BufRead,BufNewFile *.json set filetype=json
+au BufNewFile,Bufread *.ros,*.inc,*.php set keywordprg="help"
+
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Maps
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -403,7 +331,7 @@ let g:mapleader = "'"
 :vnoremap <silent> ,? y?<C-R>=escape(@", '\\/.*$^~[]')<CR><CR>
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" 编码自动补全
+" 括号自动补全
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 if has("autocmd")
     augroup vimrcEx
@@ -457,13 +385,6 @@ if has("autocmd")
   " Python 文件的一般设置，比如不要 tab 等
   autocmd FileType python setlocal et | setlocal sta | setlocal sw=4
 
-  " Python Unittest 的一些设置
-  " 可以让我们在编写 Python 代码及 unittest 测试时不需要离开 vim
-  " 键入 :make 或者点击 gvim 工具条上的 make 按钮就自动执行测试用例
-  "autocmd FileType python compiler pyunit
-  "autocmd FileType python setlocal makeprg=python\ ./alltests.py
-  "autocmd BufNewFile,BufRead test*.py setlocal makeprg=python\ %
-
 endif
 
 " Python syntax setting
@@ -472,16 +393,6 @@ let python_highlight_all = 1
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " GoLang支持
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-"Go lang
-au BufNewFile,BufRead *.go set filetype=go
-" php & html
-au BufNewFile,BufRead *.tpl set filetype=html
-au BufNewFile,BufRead *.ctp set filetype=php
-"au BufNewFile,BufRead *.html set filetype=jinja
-au BufRead,BufNewFile *.css set ft=css syntax=css3
-au BufRead,BufNewFile *.json set filetype=json
-au BufNewFile,Bufread *.ros,*.inc,*.php set keywordprg="help"
-
 " go fmt
 function! GolangFmt()
   " Check php syntax
@@ -493,25 +404,6 @@ function! GolangFmt()
   make %
 endfunction
 map <F6> :call GolangFmt()<CR>
-
-"======================================================
-"HTML标签补全
-"======================================================
-function! InsertHtmlTag()
-  let pat = '\c<\w\+\s*\(\s\+\w\+\s*=\s*[''#$;,()."a-z0-9]\+\)*\s*>'
-  normal! a>
-  let save_cursor = getpos('.')
-  let result = matchstr(getline(save_cursor[1]), pat)
-  "if (search(pat, 'b', save_cursor[1]) && searchpair('<','','>', 'bn',0,getline('.')) > 0)
-  if (search(pat, 'b', save_cursor[1]))
-    normal! lyiwf>
-    normal! a</
-    normal! p
-    normal! a>
-  endif
-  :call cursor(save_cursor[1], save_cursor[2], save_cursor[3])
-endfunction
-inoremap > <ESC>:call InsertHtmlTag()<CR>a
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " 非正常文件语法高亮支持
