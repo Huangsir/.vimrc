@@ -44,7 +44,6 @@ Bundle 'scrooloose/nerdcommenter'
 
 " 神一样的不全工具，可以取代clang_complete, AutoComplPop, Supertab, neocomplcache
 Bundle 'Valloric/YouCompleteMe'
-let g:ycm_min_num_of_chars_for_completion = 3
 
 " 大文件分割，可以加快vim的速度
 Bundle 'vim-scripts/LargeFile'
