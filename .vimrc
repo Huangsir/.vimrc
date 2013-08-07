@@ -72,6 +72,9 @@ let g:syntastic_mode_map = { 'passive_filetypes': ['scss', 'slim'] }
 Bundle 'cespare/vim-toml'
 Bundle 'ingydotnet/yaml-vim'
 
+" xml支持
+Bundle 'othree/xml.vim'
+
 " javascript语法
 Bundle 'pangloss/vim-javascript'
 let g:html_indent_inctags = "html,body,head,tbody"
