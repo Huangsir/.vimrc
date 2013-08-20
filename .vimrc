@@ -405,7 +405,9 @@ function! GolangFmt()
   setlocal errorformat=%m\ in\ %f\ on\ line\ %l
   make %
 endfunction
-map <F6> :call GolangFmt()<CR>
+
+" 自动格式化
+autocmd FileType go map <F6> GolangFmt()<CR>
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " 非正常文件语法高亮支持
