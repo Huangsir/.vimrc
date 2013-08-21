@@ -371,6 +371,32 @@ if has("autocmd")
 endif
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" 自动格式化
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+map <F6> :call FormartSrc()<CR>
+func FormartSrc()
+    exec "w"
+    if &filetype == 'c'
+        exec "!astyle --style=ansi --one-line=keep-statements -a --suffix=none %"
+    elseif &filetype == 'cpp' || &filetype == 'hpp'
+        exec "r !astyle --style=ansi --one-line=keep-statements -a --suffix=none %> /dev/null 2>&1"
+    elseif &filetype == 'perl'
+        exec "!astyle --style=gnu --suffix=none %"
+    elseif &filetype == 'py'||&filetype == 'python'
+        exec "r !autopep8 -i --aggressive %"
+    elseif &filetype == 'java'
+        exec "!astyle --style=java --suffix=none %"
+    elseif &filetype == 'jsp'
+        exec "!astyle --style=gnu --suffix=none %"
+    elseif &filetype == 'xml'
+        exec "!astyle --style=gnu --suffix=none %"
+    elseif &filetype == 'go'
+        exec "!go fmt %"
+    endif
+    exec "e! %"
+endfunc
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Php支持
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " php代码折叠，会影响性能
@@ -391,23 +417,6 @@ endif
 
 " Python syntax setting
 let python_highlight_all = 1
-
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" GoLang支持
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" go fmt
-function! GolangFmt()
-  " Check php syntax
-  setlocal makeprg=\go\ fmt
-  " Set shellpipe
-  setlocal shellpipe=>
-  " Use error format for parsing PHP error output
-  setlocal errorformat=%m\ in\ %f\ on\ line\ %l
-  make %
-endfunction
-
-" 自动格式化
-autocmd FileType go map <F6> GolangFmt()<CR>
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " 非正常文件语法高亮支持
