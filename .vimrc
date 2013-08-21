@@ -371,7 +371,9 @@ if has("autocmd")
 endif
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" 自动格式化
+" 自动格式化，需要预先安装
+" sudo apt-get install astyle
+" sudo pip install autopep8
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 map <F6> :call FormartSrc()<CR>
 func FormartSrc()
@@ -391,6 +393,7 @@ func FormartSrc()
     elseif &filetype == 'xml'
         exec "!astyle --style=gnu --suffix=none %"
     elseif &filetype == 'go'
+        "需要预先装有go
         exec "!go fmt %"
     endif
     exec "e! %"
