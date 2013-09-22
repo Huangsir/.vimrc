@@ -42,7 +42,7 @@ let g:Powerline_symbols = 'fancy'
 " 快速注释插件；快捷键 <leader>cc  <leader>cu
 Bundle 'scrooloose/nerdcommenter'
 
-" 神一样的不全工具，可以取代clang_complete, AutoComplPop, Supertab, neocomplcache
+" 神一样的补全工具，可以取代clang_complete, AutoComplPop, Supertab, neocomplcache
 Bundle 'Valloric/YouCompleteMe'
 
 " 大文件分割，可以加快vim的速度
@@ -57,6 +57,13 @@ let g:pymode_lint_ignore = "E501,C901,W0611"
 let g:pymode_folding = 0
 " Key for show python documentation
 let g:pymode_doc_key = '<leader>k'
+
+" Golang语法插件，支持goimport，需要安装"go install github.com/bradfitz/goimports"
+Bundle 'cespare/vim-golang'
+" Golang自动跳转，需要安装"go install code.google.com/p/rog-go/exp/cmd/godef"
+Bundle 'dgryski/vim-godef'
+" 自动补全，需要安装"go install github.com/nsf/gocode"
+Bundle 'Blackrush/vim-gocode'
 
 " 语法检查，需要放在python-mode后面以免冲突
 Bundle 'scrooloose/syntastic'
@@ -73,7 +80,7 @@ Bundle 'cespare/vim-toml'
 Bundle 'ingydotnet/yaml-vim'
 
 " xml支持
-Bundle 'othree/xml.vim'
+"Bundle 'othree/xml.vim'
 
 " javascript语法
 Bundle 'pangloss/vim-javascript'
@@ -106,6 +113,9 @@ au VimEnter * RainbowParenthesesToggle
 au Syntax * RainbowParenthesesLoadRound
 au Syntax * RainbowParenthesesLoadSquare
 au Syntax * RainbowParenthesesLoadBraces
+
+" vim-markdown-preview
+Bundle 'suan/vim-instant-markdown'
 
 " required!
 filetype plugin indent on
