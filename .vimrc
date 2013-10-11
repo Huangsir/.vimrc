@@ -10,11 +10,6 @@ filetype off                   " required!
 set rtp+=~/.vim/bundle/vundle/
 call vundle#rc() " 使用:BundleInstall安装插件
 Bundle 'gmarik/vundle'
-"Bundle 'scrooloose/nerdtree'
-"Bundle 'ervandew/supertab'
-"Bundle 'msanders/snipmate.vim'
-"Bundle 'Shougo/neocomplcache'
-"Bundle 'Shougo/neosnippet'
 
 " 快速查找文件的神器，快捷键C-p
 Bundle 'kien/ctrlp.vim'
@@ -24,6 +19,15 @@ map <F3> :CtrlP ~/www/gitgateway/<cr>
 
 " 配色样式
 Bundle 'altercation/vim-colors-solarized'
+Bundle 'tomasr/molokai'
+Bundle 'tpope/vim-vividchalk'
+colorscheme molokai
+
+" TagBar
+Bundle 'majutsushi/tagbar'
+nnoremap <F9> :TagbarToggle<CR>
+let g:tagbar_autoclose = 1
+let g:tagbar_autofocus = 1
 
 " 同时修改多个东西的神器
 Bundle 'terryma/vim-multiple-cursors'
@@ -252,7 +256,6 @@ set completeopt=longest,menu
 
 " 高亮配置
 set background=dark
-colorscheme solarized
 
 " 字体设置
 if has("win32")
