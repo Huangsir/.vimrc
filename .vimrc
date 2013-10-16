@@ -29,6 +29,35 @@ nnoremap <F9> :TagbarToggle<CR>
 let g:tagbar_autoclose = 1
 let g:tagbar_autofocus = 1
 
+" Golang 版本的Tagbar
+let g:tagbar_type_go = {
+    \ 'ctagstype' : 'go',
+    \ 'kinds'     : [
+        \ 'p:package',
+        \ 'i:imports:1',
+        \ 'c:constants',
+        \ 'v:variables',
+        \ 't:types',
+        \ 'n:interfaces',
+        \ 'w:fields',
+        \ 'e:embedded',
+        \ 'm:methods',
+        \ 'r:constructor',
+        \ 'f:functions'
+    \ ],
+    \ 'sro' : '.',
+    \ 'kind2scope' : {
+        \ 't' : 'ctype',
+        \ 'n' : 'ntype'
+    \ },
+    \ 'scope2kind' : {
+        \ 'ctype' : 't',
+        \ 'ntype' : 'n'
+    \ },
+    \ 'ctagsbin'  : 'gotags',
+    \ 'ctagsargs' : '-sort -silent'
+\ }
+
 " 同时修改多个东西的神器
 Bundle 'terryma/vim-multiple-cursors'
 let g:multi_cursor_start_key='<F7>'
@@ -64,10 +93,14 @@ let g:pymode_doc_key = '<leader>k'
 
 " Golang语法插件，支持goimport，需要安装"go install github.com/bradfitz/goimports"
 Bundle 'cespare/vim-golang'
-" Golang自动跳转，需要安装"go install code.google.com/p/rog-go/exp/cmd/godef"
-Bundle 'dgryski/vim-godef'
 " 自动补全，需要安装"go install github.com/nsf/gocode"
 Bundle 'Blackrush/vim-gocode'
+" Golang自动跳转，需要安装"go install code.google.com/p/rog-go/exp/cmd/godef"
+Bundle 'dgryski/vim-godef'
+" 新的Tab页显示
+let g:godef_split=2
+" 同一个文件下不Split窗口
+let g:godef_same_file_in_same_window=1
 
 " 语法检查，需要放在python-mode后面以免冲突
 Bundle 'scrooloose/syntastic'
@@ -86,6 +119,9 @@ Bundle 'ingydotnet/yaml-vim'
 " xml支持
 "Bundle 'othree/xml.vim'
 
+" SQL 支持
+Bundle 'vim-scripts/SQLUtilities'
+
 " javascript语法
 Bundle 'pangloss/vim-javascript'
 let g:html_indent_inctags = "html,body,head,tbody"
@@ -97,6 +133,7 @@ Bundle 'vim-scripts/UltiSnips'
 let g:UltiSnipsExpandTrigger="<c-j>"
 let g:UltiSnipsJumpForwardTrigger="<c-j>"
 let g:UltiSnipsJumpBackwardTrigger="<c-k>"
+let g:snips_author="Gw.Huangsir"
 
 "快速添加环绕符号；快捷键： ysiw' yss' vS' ds' cs'(
 Bundle 'tpope/vim-surround'
@@ -407,7 +444,8 @@ func FormartSrc()
         exec "!astyle --style=gnu --suffix=none %"
     elseif &filetype == 'go'
         "需要预先装有go
-        exec "!go fmt %"
+        exec "Fmt"
+        exec "w"
     endif
     exec "e! %"
 endfunc
