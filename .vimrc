@@ -11,6 +11,9 @@ set rtp+=~/.vim/bundle/vundle/
 call vundle#rc() " 使用:BundleInstall安装插件
 Bundle 'gmarik/vundle'
 
+" PHP代码折叠神器，不卡，比内置的折叠好很多
+Bundle 'rayburgemeestre/phpfolding.vim'
+
 " 快速查找文件的神器，快捷键C-p
 Bundle 'kien/ctrlp.vim'
 let g:ctrlp_custom_ignore = '\.git$\|\.hg$\|\.svn$\|.rvm$'
@@ -449,12 +452,6 @@ func FormartSrc()
     endif
     exec "e! %"
 endfunc
-
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Php支持
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" php代码折叠，会影响性能
-let php_folding = 1
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Python支持
