@@ -70,10 +70,25 @@ let g:multi_cursor_skip_key='<C-x>'
 let g:multi_cursor_quit_key='<Esc>'
 
 "下面那条状态栏，需要特殊的字体支持
-Bundle 'Lokaltog/vim-powerline'
-" 状态栏要两行
-set laststatus=2 
-let g:Powerline_symbols = 'fancy'
+Bundle 'bling/vim-airline'
+let g:airline_powerline_fonts=1
+let g:airline#extensions#virtualenv#enabled = 1
+if !exists('g:airline_symbols')
+    let g:airline_symbols = {}
+endif
+let g:airline_left_sep = '⮀'
+let g:airline_left_alt_sep = '⮁'
+let g:airline_right_sep = '⮂'
+let g:airline_right_alt_sep = '⮃'
+let g:airline_symbols.branch = '⭠'
+let g:airline_symbols.readonly = '⭤'
+let g:airline_symbols.linenr = '⭡'
+
+" 启动就显示状态栏
+set laststatus=2
+
+" 显示Git分支名称
+Bundle 'tpope/vim-fugitive'
 
 " 快速注释插件；快捷键 <leader>cc  <leader>cu
 Bundle 'scrooloose/nerdcommenter'
@@ -88,11 +103,13 @@ Bundle 'vim-scripts/LargeFile'
 Bundle 'klen/python-mode'
 let g:pymode_run_key = '<leader><C-R>'
 " Map keys for autocompletion
-let g:pymode_lint_ignore = "E501,C901,W0611"
+let g:pymode_lint_ignore = 'W0702,E501,C0301'
 " Disable python folding
 let g:pymode_folding = 0
 " Key for show python documentation
 let g:pymode_doc_key = '<leader>k'
+" 兼容virtualenv
+let g:pymode_virtualenv = 1
 
 " Golang语法插件，支持goimport，需要安装"go install github.com/bradfitz/goimports"
 Bundle 'cespare/vim-golang'
@@ -118,6 +135,12 @@ let g:syntastic_mode_map = { 'passive_filetypes': ['scss', 'slim'] }
 " toml & yaml 高亮
 Bundle 'cespare/vim-toml'
 Bundle 'ingydotnet/yaml-vim'
+
+" Vim内Diff工具，直接运行git diff
+Bundle 'airblade/vim-gitgutter'
+let g:gitgutter_enabled = 1
+let g:gitgutter_realtime = 0
+let g:gitgutter_eager = 0
 
 " xml支持
 "Bundle 'othree/xml.vim'
