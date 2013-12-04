@@ -137,10 +137,11 @@ Bundle 'cespare/vim-toml'
 Bundle 'ingydotnet/yaml-vim'
 
 " Vim内Diff工具，直接运行git diff
-Bundle 'airblade/vim-gitgutter'
-let g:gitgutter_enabled = 1
-let g:gitgutter_realtime = 0
-let g:gitgutter_eager = 0
+"Bundle 'mhinz/vim-signify'
+"Bundle 'airblade/vim-gitgutter'
+"let g:gitgutter_enabled = 1
+"let g:gitgutter_realtime = 0
+"let g:gitgutter_eager = 0
 
 " xml支持
 "Bundle 'othree/xml.vim'
