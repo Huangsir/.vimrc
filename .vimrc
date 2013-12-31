@@ -93,8 +93,15 @@ Bundle 'tpope/vim-fugitive'
 " 快速注释插件；快捷键 <leader>cc  <leader>cu
 Bundle 'scrooloose/nerdcommenter'
 
-" 神一样的补全工具，可以取代clang_complete, AutoComplPop, Supertab, neocomplcache
-Bundle 'Valloric/YouCompleteMe'
+" 补全工具2
+" =============
+" Jedi-VIM
+" =============
+Bundle 'davidhalter/jedi-vim'
+let g:jedi#popup_select_first = 0
+let g:jedi#auto_initialization = 1
+let g:jedi#popup_on_dot = 0
+let g:jedi#use_tabs_not_buffers = 0
 
 " 大文件分割，可以加快vim的速度
 Bundle 'vim-scripts/LargeFile'
@@ -102,14 +109,21 @@ Bundle 'vim-scripts/LargeFile'
 " python工具集合，python-mode自带pep8检查，需要放在syntastic前面
 Bundle 'klen/python-mode'
 let g:pymode_run_key = '<leader><C-R>'
+" python checker
+let g:pymode_lint_checker = 'pep8'
 " Map keys for autocompletion
-let g:pymode_lint_ignore = 'W0702,E501,C0301'
+let g:pymode_lint_ignore = 'E501,C901'
 " Disable python folding
 let g:pymode_folding = 0
 " Key for show python documentation
 let g:pymode_doc_key = '<leader>k'
 " 兼容virtualenv
 let g:pymode_virtualenv = 1
+" 兼容YouCompleteMe
+let g:pymode_rope = 0
+
+" 神一样的补全工具，可以取代clang_complete, AutoComplPop, Supertab, neocomplcache，要放在Jedi-VIM和python-mode下面
+Bundle 'Valloric/YouCompleteMe'
 
 " Golang语法插件，支持goimport，需要安装"go install github.com/bradfitz/goimports"
 Bundle 'cespare/vim-golang'
@@ -117,6 +131,7 @@ Bundle 'cespare/vim-golang'
 Bundle 'Blackrush/vim-gocode'
 " Golang自动跳转，需要安装"go install code.google.com/p/rog-go/exp/cmd/godef"
 Bundle 'dgryski/vim-godef'
+
 " 新的Tab页显示
 let g:godef_split=2
 " 同一个文件下不Split窗口
@@ -462,7 +477,7 @@ func FormartSrc()
     elseif &filetype == 'perl'
         exec "!astyle --style=gnu --suffix=none %"
     elseif &filetype == 'py'||&filetype == 'python'
-        exec "r !autopep8 -i --aggressive %"
+        exec "r !autopep8 -i --ignore=E501 --aggressive %"
     elseif &filetype == 'java'
         exec "!astyle --style=java --suffix=none %"
     elseif &filetype == 'jsp'
