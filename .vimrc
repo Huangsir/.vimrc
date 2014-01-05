@@ -97,7 +97,7 @@ Bundle 'scrooloose/nerdcommenter'
 " =============
 " Jedi-VIM
 " =============
-Bundle 'davidhalter/jedi-vim'
+"Bundle 'davidhalter/jedi-vim'
 let g:jedi#popup_select_first = 0
 let g:jedi#auto_initialization = 1
 let g:jedi#popup_on_dot = 0
@@ -122,15 +122,15 @@ let g:pymode_virtualenv = 1
 " 兼容YouCompleteMe
 let g:pymode_rope = 0
 
-" 神一样的补全工具，可以取代clang_complete, AutoComplPop, Supertab, neocomplcache，要放在Jedi-VIM和python-mode下面
-Bundle 'Valloric/YouCompleteMe'
-
-" Golang语法插件，支持goimport，需要安装"go install github.com/bradfitz/goimports"
-Bundle 'cespare/vim-golang'
 " 自动补全，需要安装"go install github.com/nsf/gocode"
 Bundle 'Blackrush/vim-gocode'
+" Golang语法插件，支持goimport，需要安装"go install github.com/bradfitz/goimports"
+Bundle 'cespare/vim-golang'
 " Golang自动跳转，需要安装"go install code.google.com/p/rog-go/exp/cmd/godef"
 Bundle 'dgryski/vim-godef'
+
+" 神一样的补全工具，可以取代clang_complete, AutoComplPop, Supertab, neocomplcache，要放在Jedi-VIM和python-mode下面
+Bundle 'Valloric/YouCompleteMe'
 
 " 新的Tab页显示
 let g:godef_split=2
