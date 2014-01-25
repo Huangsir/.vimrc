@@ -26,6 +26,9 @@ Bundle 'tomasr/molokai'
 Bundle 'tpope/vim-vividchalk'
 colorscheme molokai
 
+" puppet支持
+Bundle 'rodjek/vim-puppet'
+
 " TagBar
 Bundle 'majutsushi/tagbar'
 nnoremap <F9> :TagbarToggle<CR>
@@ -93,11 +96,14 @@ Bundle 'tpope/vim-fugitive'
 " 快速注释插件；快捷键 <leader>cc  <leader>cu
 Bundle 'scrooloose/nerdcommenter'
 
+" 神一样的补全工具，可以取代clang_complete, AutoComplPop, Supertab, neocomplcache，要放在Jedi-VIM和python-mode下面
+Bundle 'Valloric/YouCompleteMe'
+
 " 补全工具2
 " =============
 " Jedi-VIM
 " =============
-"Bundle 'davidhalter/jedi-vim'
+Bundle 'davidhalter/jedi-vim'
 let g:jedi#popup_select_first = 0
 let g:jedi#auto_initialization = 1
 let g:jedi#popup_on_dot = 0
@@ -128,9 +134,6 @@ Bundle 'Blackrush/vim-gocode'
 Bundle 'cespare/vim-golang'
 " Golang自动跳转，需要安装"go install code.google.com/p/rog-go/exp/cmd/godef"
 Bundle 'dgryski/vim-godef'
-
-" 神一样的补全工具，可以取代clang_complete, AutoComplPop, Supertab, neocomplcache，要放在Jedi-VIM和python-mode下面
-Bundle 'Valloric/YouCompleteMe'
 
 " 新的Tab页显示
 let g:godef_split=2
@@ -488,6 +491,7 @@ func FormartSrc()
         "需要预先装有go
         exec "Fmt"
         exec "w"
+        exec "!goimports -w %"
     endif
     exec "e! %"
 endfunc
