@@ -72,20 +72,22 @@ let g:multi_cursor_prev_key='<C-N>'
 let g:multi_cursor_skip_key='<C-x>'
 let g:multi_cursor_quit_key='<Esc>'
 
-"下面那条状态栏，需要特殊的字体支持
+"下面那条状态栏，需要特殊的字体支持，mac下字体会出问，应该是没有安装字体的原因
 Bundle 'bling/vim-airline'
-let g:airline_powerline_fonts=1
 let g:airline#extensions#virtualenv#enabled = 1
-if !exists('g:airline_symbols')
-    let g:airline_symbols = {}
+if !has("mac")
+    let g:airline_powerline_fonts=1
+    if !exists('g:airline_symbols')
+        let g:airline_symbols = {}
+    endif
+    let g:airline_left_sep = '⮀'
+    let g:airline_left_alt_sep = '⮁'
+    let g:airline_right_sep = '⮂'
+    let g:airline_right_alt_sep = '⮃'
+    let g:airline_symbols.branch = '⭠'
+    let g:airline_symbols.readonly = '⭤'
+    let g:airline_symbols.linenr = '⭡'
 endif
-let g:airline_left_sep = '⮀'
-let g:airline_left_alt_sep = '⮁'
-let g:airline_right_sep = '⮂'
-let g:airline_right_alt_sep = '⮃'
-let g:airline_symbols.branch = '⭠'
-let g:airline_symbols.readonly = '⭤'
-let g:airline_symbols.linenr = '⭡'
 
 " 启动就显示状态栏
 set laststatus=2
