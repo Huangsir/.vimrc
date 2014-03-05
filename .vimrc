@@ -26,6 +26,9 @@ Bundle 'tomasr/molokai'
 Bundle 'tpope/vim-vividchalk'
 colorscheme molokai
 
+" zephir支持
+Bundle 'vim-scripts/Zephyr-Color-Scheme'
+
 " puppet支持
 Bundle 'rodjek/vim-puppet'
 
@@ -151,6 +154,7 @@ let g:syntastic_auto_loc_list = 1
 let g:syntastic_loc_list_height = 1
 let g:syntastic_enable_highlighting = 0
 let g:syntastic_mode_map = { 'passive_filetypes': ['scss', 'slim'] }
+let g:syntastic_ignore_files=[".py$", ".go$"]
 
 " toml & yaml 高亮
 Bundle 'cespare/vim-toml'
