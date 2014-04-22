@@ -147,14 +147,15 @@ let g:godef_same_file_in_same_window=1
 
 " 语法检查，需要放在python-mode后面以免冲突
 Bundle 'scrooloose/syntastic'
-let g:syntastic_check_on_open = 1
+let g:syntastic_check_on_open = 0
 let g:syntastic_error_symbol = '✗'
 let g:syntastic_warning_symbol = '⚠'
 let g:syntastic_auto_loc_list = 1
 let g:syntastic_loc_list_height = 1
 let g:syntastic_enable_highlighting = 0
 let g:syntastic_mode_map = { 'passive_filetypes': ['scss', 'slim'] }
-let g:syntastic_ignore_files=[".py$", ".go$"]
+let g:syntastic_ignore_files=[".py$"]
+highlight SyntasticErrorSign guifg=white guibg=black
 
 " toml & yaml 高亮
 Bundle 'cespare/vim-toml'
@@ -172,6 +173,7 @@ Bundle 'ingydotnet/yaml-vim'
 
 " SQL 支持
 Bundle 'vim-scripts/SQLUtilities'
+let g:omni_sql_no_default_maps = 1
 
 " javascript语法
 Bundle 'pangloss/vim-javascript'
