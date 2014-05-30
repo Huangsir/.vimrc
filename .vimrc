@@ -14,6 +14,9 @@ Bundle 'gmarik/vundle'
 " PHP代码折叠神器，不卡，比内置的折叠好很多
 Bundle 'rayburgemeestre/phpfolding.vim'
 
+" PHP5.5语法支持
+Bundle 'vim-scripts/php.vim-for-php5'
+
 " 快速查找文件的神器，快捷键C-p
 Bundle 'kien/ctrlp.vim'
 let g:ctrlp_custom_ignore = '\.git$\|\.hg$\|\.svn$\|.rvm$'
@@ -160,6 +163,9 @@ highlight SyntasticErrorSign guifg=white guibg=black
 " toml & yaml 高亮
 Bundle 'cespare/vim-toml'
 Bundle 'ingydotnet/yaml-vim'
+
+" json高亮
+Bundle 'elzr/vim-json'
 
 " Vim内Diff工具，直接运行git diff
 "Bundle 'mhinz/vim-signify'
