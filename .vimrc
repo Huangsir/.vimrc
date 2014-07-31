@@ -187,6 +187,16 @@ let g:html_indent_inctags = "html,body,head,tbody"
 let g:html_indent_script1 = "inc"
 let g:html_indent_style1 = "inc"
 
+" HTML支持
+Bundle "mattn/emmet-vim"
+Bundle "tmhedberg/matchit"
+
+" Twig插件vim支持
+Bundle "evidens/vim-twig"
+
+" XML支持
+Bundle "othree/xml.vim"
+
 " 快速补全代码；
 Bundle 'vim-scripts/UltiSnips'
 let g:UltiSnipsExpandTrigger="<c-j>"
@@ -503,8 +513,7 @@ func FormartSrc()
         exec "!astyle --style=gnu --suffix=none %"
     elseif &filetype == 'go'
         "需要预先装有go
-        exec "Fmt"
-        exec "w"
+        exec "!gofmt -w %"
         exec "!goimports -w %"
     endif
     exec "e! %"
