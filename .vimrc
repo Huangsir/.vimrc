@@ -20,8 +20,9 @@ Bundle 'vim-scripts/php.vim-for-php5'
 " 快速查找文件的神器，快捷键C-p
 Bundle 'kien/ctrlp.vim'
 let g:ctrlp_custom_ignore = '\.git$\|\.hg$\|\.svn$\|.rvm$'
-" 特定项目
-map <F3> :CtrlP ~/www/gitgateway/<cr>
+
+" 项目
+map <F3> :CtrlP :pwd<cr>
 
 " 配色样式
 Bundle 'altercation/vim-colors-solarized'
@@ -30,7 +31,7 @@ Bundle 'tpope/vim-vividchalk'
 colorscheme molokai
 
 " zephir支持
-Bundle 'vim-scripts/Zephyr-Color-Scheme'
+"Bundle 'vim-scripts/Zephyr-Color-Scheme'
 
 " puppet支持
 Bundle 'rodjek/vim-puppet'
@@ -104,9 +105,6 @@ Bundle 'tpope/vim-fugitive'
 " 快速注释插件；快捷键 <leader>cc  <leader>cu
 Bundle 'scrooloose/nerdcommenter'
 
-" 神一样的补全工具，可以取代clang_complete, AutoComplPop, Supertab, neocomplcache，要放在Jedi-VIM和python-mode下面
-Bundle 'Valloric/YouCompleteMe'
-
 " 补全工具2
 " =============
 " Jedi-VIM
@@ -116,12 +114,14 @@ let g:jedi#popup_select_first = 0
 let g:jedi#auto_initialization = 1
 let g:jedi#popup_on_dot = 0
 let g:jedi#use_tabs_not_buffers = 0
+let g:jedi#goto_definitions_command = "<C-]>"
 
 " 大文件分割，可以加快vim的速度
 Bundle 'vim-scripts/LargeFile'
 
 " python工具集合，python-mode自带pep8检查，需要放在syntastic前面
 Bundle 'klen/python-mode'
+let g:pymode_rope_goto_definition_bind = "<C-]>"
 let g:pymode_run_key = '<leader><C-R>'
 " python checker
 let g:pymode_lint_checker = 'pep8'
@@ -130,21 +130,33 @@ let g:pymode_lint_ignore = 'E501,C901'
 " Disable python folding
 let g:pymode_folding = 0
 " Key for show python documentation
-let g:pymode_doc_key = '<leader>k'
+let g:pymode_doc_key = 'K'
 " 兼容virtualenv
 let g:pymode_virtualenv = 1
 " 兼容YouCompleteMe
 let g:pymode_rope = 0
 
 " 自动补全，需要安装"go install github.com/nsf/gocode"
-Bundle 'Blackrush/vim-gocode'
-" Golang语法插件，支持goimport，需要安装"go install github.com/bradfitz/goimports"
-Bundle 'cespare/vim-golang'
+"Bundle 'Blackrush/vim-gocode'
+" Golang语法插件，支持goimport，需要安装"go install golang.org/x/tools/cmd/goimports"
+"Bundle 'cespare/vim-golang'
 " Golang自动跳转，需要安装"go install code.google.com/p/rog-go/exp/cmd/godef"
-Bundle 'dgryski/vim-godef'
+"Bundle 'dgryski/vim-godef'
+
+" Go插件
+Bundle 'fatih/vim-go'
+let g:go_auto_type_info = 1
+let g:go_fmt_command = "goimports"
+let g:go_fmt_autosave = 0
+" goto defination
+au FileType go nmap <C-]> <Plug>(go-def-vertical)
+au FileType go nmap <C-[> <Plug>(go-def-split)
+
+" 神一样的补全工具，可以取代clang_complete, AutoComplPop, Supertab, neocomplcache，要放在Jedi-VIM和python-mode下面
+Bundle 'Valloric/YouCompleteMe'
 
 " 新的Tab页显示
-let g:godef_split=2
+let g:godef_split=3
 " 同一个文件下不Split窗口
 let g:godef_same_file_in_same_window=1
 
@@ -160,22 +172,17 @@ let g:syntastic_mode_map = { 'passive_filetypes': ['scss', 'slim'] }
 let g:syntastic_ignore_files=[".py$"]
 highlight SyntasticErrorSign guifg=white guibg=black
 
-" toml & yaml 高亮
+" toml & yaml & json 高亮
 Bundle 'cespare/vim-toml'
 Bundle 'ingydotnet/yaml-vim'
-
-" json高亮
 Bundle 'elzr/vim-json'
 
-" Vim内Diff工具，直接运行git diff
+" Vim内Diff工具，直接运行git diff (卡)
 "Bundle 'mhinz/vim-signify'
 "Bundle 'airblade/vim-gitgutter'
 "let g:gitgutter_enabled = 1
 "let g:gitgutter_realtime = 0
 "let g:gitgutter_eager = 0
-
-" xml支持
-"Bundle 'othree/xml.vim'
 
 " SQL 支持
 Bundle 'vim-scripts/SQLUtilities'
@@ -199,6 +206,8 @@ Bundle "othree/xml.vim"
 
 " 快速补全代码；
 Bundle 'vim-scripts/UltiSnips'
+Bundle 'SirVer/ultisnips'
+Bundle 'honza/vim-snippets'
 let g:UltiSnipsExpandTrigger="<c-j>"
 let g:UltiSnipsJumpForwardTrigger="<c-j>"
 let g:UltiSnipsJumpBackwardTrigger="<c-k>"
@@ -212,6 +221,9 @@ Bundle 'Yggdroot/indentLine'
 
 "更高效的移动 '' + w/fx
 Bundle 'Lokaltog/vim-easymotion'
+" 替换vim原生的搜索
+map  / <Plug>(easymotion-sn)
+omap / <Plug>(easymotion-tn)
 
 " 注释神器，快捷键 + & -
 Bundle 'terryma/vim-expand-region'
@@ -226,6 +238,7 @@ au Syntax * RainbowParenthesesLoadBraces
 
 " vim-markdown-preview
 Bundle 'suan/vim-instant-markdown'
+Bundle 'godlygeek/tabular'
 
 " required!
 filetype plugin indent on
@@ -253,7 +266,7 @@ set smartindent
 set autoread
 
 " 自动设当前编辑的文件所在目录为当前工作路径
-set autochdir
+"set autochdir
 
 " 各种编码
 set enc=utf-8
@@ -337,7 +350,7 @@ set showmatch
 set matchtime=1
 
 " 会影响NerdTree发挥
-set modifiable
+"set modifiable
 
 " 整个世界清净了
 set noerrorbells
@@ -437,6 +450,9 @@ nmap wl <C-W>l
 imap <C-s> <Esc>:wa<cr>i<Right>
 nmap <C-s> :wa<cr>
 
+" w!! tee命令解决忘记sudo的问题
+cmap w!! w !sudo tee > /dev/null %
+
 " Ctrl+u撤销
 vmap <C-u> :u<cr>
 nmap <C-u> :u<cr>
@@ -515,6 +531,8 @@ func FormartSrc()
         "需要预先装有go
         exec "!gofmt -w %"
         exec "!goimports -w %"
+    elseif &filetype == 'md' || &filetype == 'markdown'
+        exec ""
     endif
     exec "e! %"
 endfunc
