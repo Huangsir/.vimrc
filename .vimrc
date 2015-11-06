@@ -4,40 +4,43 @@
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " 插件管理
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-set nocompatible               " be iMproved
-filetype off                   " required!
+call plug#begin('~/.vim/plugged')
 
-set rtp+=~/.vim/bundle/vundle/
-call vundle#rc() " 使用:BundleInstall安装插件
-Bundle 'gmarik/vundle'
+" HTML支持
+Plug 'mattn/emmet-vim'
+Plug 'tmhedberg/matchit'
 
 " PHP代码折叠神器，不卡，比内置的折叠好很多
-Bundle 'rayburgemeestre/phpfolding.vim'
+Plug 'rayburgemeestre/phpfolding.vim'
 
 " PHP5.5语法支持
-Bundle 'vim-scripts/php.vim-for-php5'
+Plug 'vim-scripts/php.vim-for-php5'
 
 " 快速查找文件的神器，快捷键C-p
-Bundle 'kien/ctrlp.vim'
-let g:ctrlp_custom_ignore = '\.git$\|\.hg$\|\.svn$\|.rvm$'
+Plug 'kien/ctrlp.vim'
+let g:ctrlp_user_command = 'find %s -type f'        " MacOSX/Linux
+let g:ctrlp_custom_ignore = {
+            \ 'dir':  '\v[\/]\.(git|hg|svn)$',
+            \ 'file': '\v\.(exe|so|dll|git|hg|svn|rvm)$',
+            \ 'link': '',
+            \ }
 
 " 项目
 map <F3> :CtrlP :pwd<cr>
 
 " 配色样式
-Bundle 'altercation/vim-colors-solarized'
-Bundle 'tomasr/molokai'
-Bundle 'tpope/vim-vividchalk'
-colorscheme molokai
+Plug 'altercation/vim-colors-solarized'
+Plug 'tomasr/molokai'
+Plug 'tpope/vim-vividchalk'
 
 " zephir支持
-"Bundle 'vim-scripts/Zephyr-Color-Scheme'
+"Plug 'vim-scripts/Zephyr-Color-Scheme'
 
 " puppet支持
-Bundle 'rodjek/vim-puppet'
+Plug 'rodjek/vim-puppet'
 
 " TagBar
-Bundle 'majutsushi/tagbar'
+Plug 'majutsushi/tagbar'
 nnoremap <F9> :TagbarToggle<CR>
 let g:tagbar_autoclose = 1
 let g:tagbar_autofocus = 1
@@ -72,15 +75,15 @@ let g:tagbar_type_go = {
 \ }
 
 " 同时修改多个东西的神器
-Bundle 'terryma/vim-multiple-cursors'
-let g:multi_cursor_start_key='<F7>'
-let g:multi_cursor_next_key='<C-n>'
-let g:multi_cursor_prev_key='<C-N>'
-let g:multi_cursor_skip_key='<C-x>'
-let g:multi_cursor_quit_key='<Esc>'
+"Plug 'terryma/vim-multiple-cursors'
+"let g:multi_cursor_start_key='<F7>'
+"let g:multi_cursor_next_key='<C-n>'
+"let g:multi_cursor_prev_key='<C-N>'
+"let g:multi_cursor_skip_key='<C-x>'
+"let g:multi_cursor_quit_key='<Esc>'
 
 "下面那条状态栏，需要特殊的字体支持，mac下字体会出问，应该是没有安装字体的原因
-Bundle 'bling/vim-airline'
+Plug 'bling/vim-airline'
 let g:airline#extensions#virtualenv#enabled = 1
 if !has("mac")
     let g:airline_powerline_fonts=1
@@ -100,27 +103,16 @@ endif
 set laststatus=2
 
 " 显示Git分支名称
-Bundle 'tpope/vim-fugitive'
+Plug 'tpope/vim-fugitive'
 
 " 快速注释插件；快捷键 <leader>cc  <leader>cu
-Bundle 'scrooloose/nerdcommenter'
-
-" 补全工具2
-" =============
-" Jedi-VIM
-" =============
-Bundle 'davidhalter/jedi-vim'
-let g:jedi#popup_select_first = 0
-let g:jedi#auto_initialization = 1
-let g:jedi#popup_on_dot = 0
-let g:jedi#use_tabs_not_buffers = 0
-let g:jedi#goto_definitions_command = "<C-]>"
+Plug 'scrooloose/nerdcommenter'
 
 " 大文件分割，可以加快vim的速度
-Bundle 'vim-scripts/LargeFile'
+Plug 'vim-scripts/LargeFile'
 
 " python工具集合，python-mode自带pep8检查，需要放在syntastic前面
-Bundle 'klen/python-mode'
+Plug 'klen/python-mode'
 let g:pymode_rope_goto_definition_bind = "<C-]>"
 let g:pymode_run_key = '<leader><C-R>'
 " python checker
@@ -137,23 +129,29 @@ let g:pymode_virtualenv = 1
 let g:pymode_rope = 0
 
 " 自动补全，需要安装"go install github.com/nsf/gocode"
-"Bundle 'Blackrush/vim-gocode'
+"Plug 'Blackrush/vim-gocode'
 " Golang语法插件，支持goimport，需要安装"go install golang.org/x/tools/cmd/goimports"
-"Bundle 'cespare/vim-golang'
+"Plug 'cespare/vim-golang'
 " Golang自动跳转，需要安装"go install code.google.com/p/rog-go/exp/cmd/godef"
-"Bundle 'dgryski/vim-godef'
+"Plug 'dgryski/vim-godef'
 
 " Go插件
-Bundle 'fatih/vim-go'
+Plug 'fatih/vim-go'
 let g:go_auto_type_info = 1
-let g:go_fmt_command = "goimports"
-let g:go_fmt_autosave = 0
-" goto defination
-au FileType go nmap <C-]> <Plug>(go-def-vertical)
-au FileType go nmap <C-[> <Plug>(go-def-split)
+let g:go_def_mapping_enabled = 1
+
+" 补全工具2
+" =============
+" Jedi-VIM
+" =============
+Plug 'davidhalter/jedi-vim'
+let g:jedi#popup_select_first = 0
+let g:jedi#use_tabs_not_buffers = 1
+let g:jedi#popup_on_dot = 0
+let g:jedi#goto_definitions_command = "<C-]>"
 
 " 神一样的补全工具，可以取代clang_complete, AutoComplPop, Supertab, neocomplcache，要放在Jedi-VIM和python-mode下面
-Bundle 'Valloric/YouCompleteMe'
+Plug 'Valloric/YouCompleteMe'
 
 " 新的Tab页显示
 let g:godef_split=3
@@ -161,7 +159,7 @@ let g:godef_split=3
 let g:godef_same_file_in_same_window=1
 
 " 语法检查，需要放在python-mode后面以免冲突
-Bundle 'scrooloose/syntastic'
+Plug 'scrooloose/syntastic'
 let g:syntastic_check_on_open = 0
 let g:syntastic_error_symbol = '✗'
 let g:syntastic_warning_symbol = '⚠'
@@ -173,63 +171,59 @@ let g:syntastic_ignore_files=[".py$"]
 highlight SyntasticErrorSign guifg=white guibg=black
 
 " toml & yaml & json 高亮
-Bundle 'cespare/vim-toml'
-Bundle 'ingydotnet/yaml-vim'
-Bundle 'elzr/vim-json'
+"Plug 'cespare/vim-toml'
+Plug 'ingydotnet/yaml-vim'
+Plug 'elzr/vim-json'
 
 " Vim内Diff工具，直接运行git diff (卡)
-"Bundle 'mhinz/vim-signify'
-"Bundle 'airblade/vim-gitgutter'
+"Plug 'mhinz/vim-signify'
+"Plug 'airblade/vim-gitgutter'
 "let g:gitgutter_enabled = 1
 "let g:gitgutter_realtime = 0
 "let g:gitgutter_eager = 0
 
 " SQL 支持
-Bundle 'vim-scripts/SQLUtilities'
+Plug 'vim-scripts/SQLUtilities'
 let g:omni_sql_no_default_maps = 1
 
 " javascript语法
-Bundle 'pangloss/vim-javascript'
+Plug 'pangloss/vim-javascript'
 let g:html_indent_inctags = "html,body,head,tbody"
 let g:html_indent_script1 = "inc"
 let g:html_indent_style1 = "inc"
 
-" HTML支持
-Bundle "mattn/emmet-vim"
-Bundle "tmhedberg/matchit"
-
 " Twig插件vim支持
-Bundle "evidens/vim-twig"
+"Plug 'evidens/vim-twig'
 
 " XML支持
-Bundle "othree/xml.vim"
+Plug 'othree/xml.vim'
 
 " 快速补全代码；
-Bundle 'vim-scripts/UltiSnips'
-Bundle 'SirVer/ultisnips'
-Bundle 'honza/vim-snippets'
+Plug 'vim-scripts/UltiSnips'
+Plug 'SirVer/ultisnips'
+Plug 'honza/vim-snippets'
 let g:UltiSnipsExpandTrigger="<c-j>"
 let g:UltiSnipsJumpForwardTrigger="<c-j>"
 let g:UltiSnipsJumpBackwardTrigger="<c-k>"
 let g:snips_author="Gw.Huangsir"
 
 "快速添加环绕符号；快捷键： ysiw' yss' vS' ds' cs'(
-Bundle 'tpope/vim-surround'
+Plug 'tpope/vim-surround'
 
 " 缩进标识
-Bundle 'Yggdroot/indentLine'
+Plug 'Yggdroot/indentLine'
 
 "更高效的移动 '' + w/fx
-Bundle 'Lokaltog/vim-easymotion'
+Plug 'Lokaltog/vim-easymotion'
 " 替换vim原生的搜索
 map  / <Plug>(easymotion-sn)
 omap / <Plug>(easymotion-tn)
 
 " 注释神器，快捷键 + & -
-Bundle 'terryma/vim-expand-region'
+"Plug 'terryma/vim-expand-region'
 
 " 括号着色
-Bundle 'kien/rainbow_parentheses.vim'
+Plug 'kien/rainbow_parentheses.vim'
 " Always On
 au VimEnter * RainbowParenthesesToggle
 au Syntax * RainbowParenthesesLoadRound
@@ -237,8 +231,8 @@ au Syntax * RainbowParenthesesLoadSquare
 au Syntax * RainbowParenthesesLoadBraces
 
 " vim-markdown-preview
-Bundle 'suan/vim-instant-markdown'
-Bundle 'godlygeek/tabular'
+"Plug 'suan/vim-instant-markdown'
+Plug 'godlygeek/tabular'
 
 " required!
 filetype plugin indent on
@@ -247,6 +241,9 @@ filetype plugin indent on
 let g:miniBufExplMapCTabSwitchBufs = 1
 let g:miniBufExplModSelTarget = 1
 
+call plug#end()
+
+colorscheme molokai
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " General
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -388,7 +385,7 @@ else
     "set guifont=Liberation\ Mono\ 9
     "set guifont=Droid\ Sans\ Mono\ 9
     "set guifont=Consolas\ 9
-    set guifont=Monaco\ 9
+    set guifont=Monaco\ 8
     "set guifont=Dejavu\ Sans\ Mono\ 9
     set langmenu=zh_CN.utf-8
     set enc=utf-8
@@ -529,8 +526,7 @@ func FormartSrc()
         exec "!astyle --style=gnu --suffix=none %"
     elseif &filetype == 'go'
         "需要预先装有go
-        exec "!gofmt -w %"
-        exec "!goimports -w %"
+        exec "GoImports"
     elseif &filetype == 'md' || &filetype == 'markdown'
         exec ""
     endif
@@ -569,3 +565,10 @@ au BufNewFile,BufRead *.as set filetype=actionscript
 "Makefile的Tab支持
 autocmd BufEnter ?akefile* set noet ts=2 sts=2 sw=2
 
+" 如果是golang，去掉被覆盖的gd快捷键
+au filetype go nmap <Leader>gd <Plug>(go-doc)
+au filetype go nmap <Leader>gv <Plug>(go-doc-vertical)
+au FileType go nmap <Leader>ds <Plug>(go-def-split)
+au FileType go nmap <Leader>dv <Plug>(go-def-vertical)
+au FileType go nmap <Leader>dt <Plug>(go-def-tab)
+au filetype go nunmap <buffer> gd
